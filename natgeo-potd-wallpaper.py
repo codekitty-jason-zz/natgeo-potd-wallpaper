@@ -15,6 +15,7 @@ import os
 import urllib.request as request
 import datetime
 import json
+import platform
 
 # Print a nice header
 header = "NatGeo Photo of the Day Downloader - by Jason Woyak"
@@ -42,15 +43,25 @@ POTDfile = "natgeo-potd.jpg" # Set an absolute path here if you need to change t
 print("Photo URI:\n" + natGeoPOTD)
 print("\nCaption:\n" + natGeoPOTDcaption)
 
-# Download the photo to the location in the POTDfile variable
-print("Downloading Photo...")
-request.urlretrieve(natGeoPOTD, POTDfile)
+# OS Dependent wallpaper/downloading:
+myOS = platform.system()
+
+if (myOS == "Windows"):
+        # Download the photo to the location in the POTDfile variable
+        print("Downloading Photo...")
+        request.urlretrieve(natGeoPOTD, POTDfile)
       
-# Set the wallpaper - this only works in windows! 
-SPI_SET_WALLPAPER = 20
-pathToBmp = os.path.abspath(POTDfile)
-print("Setting wallpaper to " + pathToBmp + "...")
-ctypes.windll.user32.SystemParametersInfoW(SPI_SET_WALLPAPER, 0,pathToBmp, 3)
+        # Set the wallpaper - this only works in windows! 
+        SPI_SET_WALLPAPER = 20
+        pathToBmp = os.path.abspath(POTDfile)
+        print("Setting wallpaper to " + pathToBmp + "...")
+        ctypes.windll.user32.SystemParametersInfoW(SPI_SET_WALLPAPER, 0,pathToBmp, 3)
+elif (myOS == "Linux"):
+        linuxCMD = "gsettings set org.gnome.desktop.background " + natGeoPOTD
+        os.system(linuxCMD)
+#elif (myOS == "Darwin"):
+#       Hey Mac Users! I don't have a Mac to test this on! YMMV!
+
 
 # Write metadata to HTML file - mostly as a way to link to NatGeo!
 print("Writing about-photo.html ...")
@@ -60,7 +71,7 @@ HTML_file = open(HTMLpath,'w')
 HTMLstart = "<html><body>\n"
 HTML_file.write(HTMLstart)
 
-HTMLphoto = "<img src=\"" + pathToBmp + "\" width=600 />\n"
+HTMLphoto = "<img src=\"" + POTDfile + "\" width=600 />\n"
 HTML_file.write(HTMLphoto)
 
 HTMLtitle = "<h2>" + natGeoPOTDtitle + "</h2>\n"
