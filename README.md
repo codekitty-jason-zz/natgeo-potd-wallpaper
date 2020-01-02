@@ -7,7 +7,7 @@ I am in no way affiliated with National Geographic, and their Photo of the Day a
 Use at your own risk.
 
 ## Installation
-1. To install this, first you need to install the latest version (3.8.1 as of this writing) of Python for Windows, from here:
+1. To install this, first you need to install the latest version (3.8.1 as of this writing) of Python 3 for Windows, from here:
 https://www.python.org/ftp/python/3.8.1/python-3.8.1.exe
 2. Next, download the .zip of this repository and extract it to a folder on your computer someplace you have write access (a natgeo-potd folder in your Documents folder is a fine choice).
 3. Test the script by running the set-natgeo-potd-wallpaper.bat file.  Did it change your background?
