@@ -57,7 +57,8 @@ if (myOS == "Windows"):
         print("Setting wallpaper to " + pathToBmp + "...")
         ctypes.windll.user32.SystemParametersInfoW(SPI_SET_WALLPAPER, 0,pathToBmp, 3)
 elif (myOS == "Linux"):
-        linuxCMD = "gsettings set org.gnome.desktop.background " + natGeoPOTD
+        linuxCMD = "gsettings set org.gnome.desktop.background picture-uri " + natGeoPOTD
+        print("Setting background using: " + linuxCMD)
         os.system(linuxCMD)
 #elif (myOS == "Darwin"):
 #       Hey Mac Users! I don't have a Mac to test this on! YMMV!
